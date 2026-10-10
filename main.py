@@ -29,6 +29,16 @@ def read_all_books():
     for id in books:
         book = books[id]
         print(f"[{id + 1}] {book.title} written by {book.author} and published on {book.date_published}")
+
+def search_book():
+    search_entry = input("Enter title of book")
+    for id in books:
+        book = books[id]
+        if search_entry.strip().lower() in book.title.strip().lower() or search_entry.strip().lower() in book.author.strip().lower():
+            print(f"[{id + 1}] {book.title} written by {book.author} and published on {book.date_published}")
+            
+
+            
     
     
     
@@ -36,7 +46,7 @@ def read_all_books():
 books = {}
 while True:
     add_book()
-    read_all_books()
+    search_book()
 
     
     
