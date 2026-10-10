@@ -73,10 +73,30 @@ def borrow_book():
     for id in books:
         book = books[id]
         if (title.strip().lower() == book.title.strip().lower()):
+            if book.status == True:
+                print("Book has already been borrowed.")
+                return
             book.status = True
             new_borrow_transaction = BorrowTransaction(borrower_name, title, str(date.today()))
             borrow_transactions[borrow_transaction_id] = new_borrow_transaction
             print("Succesfully recorded the transaction.")
+            
+def return_book():
+    title = input("Enter the book title:")
+    for id in books:
+        book = books[id]
+        if title.strip().lower() == book.title.strip().lower():
+            if not book.status:
+                print("This book was not borrowed")
+            book.status = False
+            for id in borrow_transactions:
+                transaction = borrow_transactions[id]
+                if transaction.title == title.strip().lower():
+                    transaction.date_returned = str(date.today())
+                    print("Book successfully returned")
+             
+    
+    
     
         
 
@@ -92,9 +112,9 @@ while True:
     add_book()
     search_book()
     borrow_book()
-    print(borrowers)
-    print(borrow_transactions)
-    search_book()
+    return_book()
+    for id in borrow_transactions:
+        print(borrow_transactions[id].title, borrow_transactions[id].date_returned)
 
     
     
