@@ -4,5 +4,11 @@
         "title": "Unbowed",
         "date_borrowed": "2026-10-12",
         "date_returned": "2026-10-12"
+    },
+    "1": {
+        "borrower": "Erick Kanja",
+        "title": "Peter pan",
+        "date_borrowed": "2026-10-14",
+        "date_returned": "2026-10-14"
     }
 }

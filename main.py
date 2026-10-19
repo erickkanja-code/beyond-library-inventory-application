@@ -1,14 +1,16 @@
-import json
-import os
-from abc import ABC
-from datetime import date, datetime
-from book import Book 
+"""Entry point for the Library Inventory Application (command-line menu)."""
 from utils import get_choice, get_text
-from book import add_book, books, read_all_books, search_book, filter_borrowed_books
-from borrower import return_book, borrow_book
-
-
-
+from book import (
+    add_book,
+    books,
+    read_all_books,
+    search_books,
+    print_books,
+    filter_borrowed_books,
+    show_available_books,
+)
+from borrower import borrow_book, return_book
+from author import show_books_by_author
 
 
 def menu():
@@ -29,14 +31,16 @@ def menu():
             "4. Borrow a book\n"
             "5. Return a book\n"
             "6. View borrowed books\n"
-            "7. Quit\n"
+            "7. View available books\n"
+            "8. View books by author\n"
+            "9. Quit\n"
             "=================================\n"
-            "Enter your choice (1-7): ",
-            range(1, 8),
+            "Enter your choice (1-9): ",
+            range(1, 10),
         )
         if choice == 1:
             add_book()
-        elif choice == 7:
+        elif choice == 9:
             print("Goodbye!")
             break
         elif not books:
@@ -44,17 +48,19 @@ def menu():
         elif choice == 2:
             read_all_books()
         elif choice == 3:
-            search_book(get_text("Enter a title or author to search for: "))
+            query = get_text("Enter a title or author to search for: ")
+            print_books(search_books(query), "No books matched your search.")
         elif choice == 4:
             borrow_book()
         elif choice == 5:
             return_book()
         elif choice == 6:
-            if any(book.status for book in books.values()):
-                filter_borrowed_books()
-            else:
-                print("No books are currently borrowed.")
+            filter_borrowed_books()
+        elif choice == 7:
+            show_available_books()
+        elif choice == 8:
+            show_books_by_author(books)
 
 
-
-menu()
+if __name__ == "__main__":
+    menu()

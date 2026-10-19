@@ -5,5 +5,12 @@
         "category": 1,
         "status": false,
         "date_published": "08-01-2209"
+    },
+    "1": {
+        "title": "Peter Pan",
+        "author": "Jack",
+        "category": 1,
+        "status": false,
+        "date_published": "12-02-2005"
     }
 }
